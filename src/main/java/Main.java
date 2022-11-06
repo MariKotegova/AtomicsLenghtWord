@@ -36,14 +36,24 @@ public class Main {
         //полиндром
         Thread thread2 = new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 3 && text.charAt(0) == text.charAt(2)) {
-                    lenghtWordThree.addAndGet(1);
-                } else if (text.length() == 4 && text.charAt(0) == text.charAt(3) && text.charAt(1) == text.charAt(2)) {
-                    lenghtWordFour.addAndGet(1);
-                } else if (text.length() == 5 && text.charAt(0) == text.charAt(4) && text.charAt(1) == text.charAt(3)) {
-                    lenghtWordFive.addAndGet(1);
+                if (text.length() > 1){
+                    boolean result = true;
+                    for (int i = 0; i < text.length() / 2; i++){
+                        if (text.charAt(i) == text.charAt(text.length() - 1 - i)){
+                        } else {
+                            result = false;
+                            break;
+                        }
+                    }
+                    if (result && text.length() == 3) {
+                        lenghtWordThree.addAndGet(1);
+                    } else if (result && text.length() == 4) {
+                        lenghtWordFour.addAndGet(1);
+                    } else if (result && text.length() == 5) {
+                        lenghtWordFive.addAndGet(1);
+                    }
                 }
-            }
+             }
         });
         // если буквы идут по возрастанию
         Thread thread3 = new Thread(() -> {
